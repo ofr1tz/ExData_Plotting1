@@ -26,9 +26,13 @@ cacheLocale <- Sys.getlocale("LC_TIME")
 Sys.setlocale("LC_TIME", "C")
 
 # Plot and Save
-png(filename="plot2.png", width=480, height=480, units="px")
+png(filename="plot3.png", width=480, height=480, units="px")
 par(mar=c(2,4,2,2))
-with(dat, plot(DateTime, Global_active_power, type="l", ylab="Global Active Power (kilowatts)", xlab=""))
+with(dat, plot(DateTime, Sub_metering_1, type="n", ylab="Energy sub metering", xlab=""))
+with(dat, lines(DateTime, Sub_metering_1, col="black"))
+with(dat, lines(DateTime, Sub_metering_2, col="red"))
+with(dat, lines(DateTime, Sub_metering_3, col="blue"))
+legend("topright",legend=names(dat[6:8]),lty=c(1,1,1), col=c("black","red","blue"))
 dev.off()
 
 # Switch back to cached local date format
