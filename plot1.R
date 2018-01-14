@@ -19,8 +19,11 @@ dat <- dat %>% mutate(Time=dmy_hms(paste(Date, Time))) %>%
       select(-Date)
 
 # Extract cases of 2007-02-01 and 2007-02-02
-dat <- dat %>% filter(DateTime %within% (ymd("2007-02-01") %--% ymd("2007-02-02")))
+dat <- dat %>% filter(DateTime %within% (ymd_hms("2007-02-01 00:00:00") %--% ymd_hms("2007-02-02 23:59:59")))
 
-# Plot
+# Plot and Save
+png(filename="plot1.png", width=480, height=480, units="px")
+hist(dat$Global_active_power, col="red", main="Global Active Power", xlab="Global Active Power (kilowatts)")
+dev.off()
 
                       
